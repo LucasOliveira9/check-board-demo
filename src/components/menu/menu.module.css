@@ -1,0 +1,259 @@
+/* =========================
+   MENU ANCHOR
+========================= */
+
+.menuAnchor {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+}
+
+/* =========================
+   HAMBURGER
+========================= */
+
+.hamburger {
+  all: unset;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+
+  border-radius: 6px;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hamburger:focus,
+.hamburger:focus-visible,
+.hamburger:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .hamburger {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+/* =========================
+   PANEL
+========================= */
+
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+
+  width: 380px;
+  max-width: calc(100vw - 16px);
+
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 16px;
+  background: #111;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Scroll discreto */
+.panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+
+.panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+  .panel {
+    width: 400px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .panel {
+    width: min(92vw, 360px);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .panel {
+    max-height: calc(100vh - 64px);
+    padding: 10px;
+    gap: 8px;
+    border-radius: 8px;
+  }
+}
+
+/* =========================
+   PANEL CONTENT
+========================= */
+
+.panel > button {
+  width: 100%;
+}
+
+.panel button,
+.panel input {
+  height: 36px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Mobile: compactar */
+@media (max-width: 480px) {
+  .panel button,
+  .panel input {
+    height: 34px;
+    font-size: 13px;
+  }
+}
+
+.about {
+  margin-top: 5px;
+}
+
+/* =========================
+   SUBLINE (DIVISÓRIA)
+========================= */
+
+.subline {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.35);
+  margin: 12px 0 8px 0;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.inputFen {
+  font-size: 10px;
+  width: 296px;
+  text-align: center;
+}
+
+.inputDelay {
+  text-align: center;
+  width: 296px;
+}
+
+@media (max-width: 768px) {
+  .inputFen,
+  .inputDelay {
+    width: 100%;
+  }
+}
+
+/* =========================
+   ROWS
+========================= */
+
+.row {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+
+.row_center {
+  justify-content: center;
+}
+
+/* input nunca estoura */
+.row input {
+  min-width: 0;
+}
+
+/* botão fixo */
+.row button {
+  flex-shrink: 0;
+  width: 90px;
+}
+
+.row input + button {
+  margin-left: auto;
+}
+
+/* Mobile: quebra bonita */
+@media (max-width: 480px) {
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .row button,
+  .row input {
+    width: 100%;
+  }
+
+  .row input + button {
+    margin-left: 0;
+  }
+}
+
+/* =========================
+   LABEL
+========================= */
+
+.label {
+  font-size: 18px;
+  opacity: 0.7;
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .label {
+    font-size: 14px;
+  }
+}
+
+/* =========================
+   SEGMENT
+========================= */
+
+.segment {
+  display: flex;
+  gap: 0;
+  border: 1px solid #333;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.segment button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  height: 32px;
+}
+
+.segment button:hover {
+  background: #222;
+}

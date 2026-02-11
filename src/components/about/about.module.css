@@ -1,0 +1,150 @@
+.container {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+
+  background-color: #242424f2;
+  color: #ffffff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+
+  font-family: system-ui, sans-serif;
+}
+
+/* Caixa de leitura */
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+
+  background-color: #000000fa;
+
+  padding: 28px 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header nunca rola */
+.header {
+  flex-shrink: 0;
+  text-align: center;
+  position: relative;
+}
+
+.header > .close {
+  position: absolute;
+  top: 0;
+  right: 5px;
+
+  background: none;
+  border: none;
+  color: #d6d6d6;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #9aa4b2;
+  margin-top: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Área que realmente rola */
+.scroll {
+  flex: 1;
+  min-height: 0;
+
+  overflow-y: auto;
+  padding-right: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* Scroll discreto */
+.scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll::-webkit-scrollbar-thumb {
+  background: #2d7dff;
+  border-radius: 4px;
+}
+
+/* Conteúdo */
+section h2 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+section p,
+li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #d6d6d6;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+ul {
+  padding-left: 1.2rem;
+}
+
+.feature {
+  padding-left: 10px;
+  border-left: 2px solid #2d7dff;
+}
+
+.feature h3 {
+  font-size: 0.95rem;
+  margin: 0 0 4px 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid #2a2f3a;
+  padding-top: 12px;
+  font-size: 0.85rem;
+  color: #b8c1cc;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .wrapper {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 20px 14px;
+    width: 100%;
+  }
+
+  section p,
+  li {
+    font-size: 0.9rem;
+  }
+}
