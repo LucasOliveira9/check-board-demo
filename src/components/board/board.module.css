@@ -3,4 +3,6 @@
   width: min(90vw, 90vh);
   max-width: 720px;
   box-sizing: border-box;
+
+  padding-top: clamp(0px, 8vh, 90px);
 }
