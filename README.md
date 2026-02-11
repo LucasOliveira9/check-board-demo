@@ -1,75 +1,159 @@
-# React + TypeScript + Vite
+# ♟️ Board Library – Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a **demo application** built to showcase a board visualization library currently under development.
 
-Currently, two official plugins are available:
+The library is designed to be **engine-agnostic**, focusing strictly on board rendering, interaction handling, and runtime orchestration.  
+It does **not implement game rules**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Any rule system that operates on an 8×8 board (chess or otherwise) can be built on top of it.
 
-## React Compiler
+---
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 🎯 Purpose
 
-Note: This will impact Vite dev & build performances.
+This repository exists primarily for:
 
-## Expanding the ESLint configuration
+- Study and architectural practice
+- Runtime experimentation
+- Exploring decoupled system design
+- Separating UI, board rendering, and rule engines
+- Refining a reusable board visualization core
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Although fully functional, the main goal is **learning and structural refinement**, not production deployment.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🧠 Architectural Philosophy
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The board library:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Is independent of game rules
+- Emits interaction feedback instead of enforcing legality
+- Can be paired with any external rule engine
+- Supports runtime-level orchestration
+- Keeps rendering separate from logic
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The demo implements:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- A chess rule engine layered on top of the board
+- Runtime classes responsible for orchestration
+- Event-driven communication between system layers
+
+React components act primarily as a rendering layer.  
+Core logic is intentionally abstracted outside the UI.
+
+---
+
+## 🚀 Features
+
+### 🔁 Reset
+
+Resets the board to its initial position.
+
+---
+
+### ↩️ Undo / Redo
+
+Navigate backward and forward through moves.
+
+Important behavior:
+
+- Loading a new FEN
+- Resetting
+- Starting a FEN stream
+
+…will clear move history.
+
+If you undo and make a new move, forward history is discarded and a new branch is created.
+
+---
+
+### 🔤 Text / 🖼 Image Mode
+
+Switch between text-based and image-based piece rendering.
+
+This can be done:
+
+- At any time
+- Even during a FEN stream
+
+---
+
+### 📐 Scaling & Highlight
+
+Toggle board scaling behavior and square highlighting.
+
+---
+
+### 🔄 Flip
+
+Rotate the board orientation.
+
+---
+
+### 📡 Load FEN Stream
+
+Loads **1167 FEN positions sequentially**.
+
+- Not all FENs are valid
+- More than 1000 valid positions are rendered
+- The same button pauses and resumes the stream
+- Interaction is allowed while paused
+- Resuming discards manual moves and restores the stream
+
+---
+
+### 🧾 Custom FEN Input
+
+Load a custom FEN position manually (if valid).
+
+---
+
+### ⏱ Stream Delay Control
+
+Define the delay between FEN positions during streaming.
+
+---
+
+## 🏗 Project Status
+
+The project is functional but evolving.
+
+Its core objective is:
+
+> Strengthening architectural thinking  
+> Practicing runtime decoupling  
+> Building a reusable board rendering foundation
+
+---
+
+## 🛠 Tech Stack
+
+- React (UI layer)
+- TypeScript
+- Runtime orchestration classes
+- Event-driven internal communication
+
+---
+
+## 🔮 Long-Term Vision
+
+Planned evolution includes:
+
+- Clear separation between Board, Engine, and UI layers
+- Multiplayer support
+- Improved runtime abstraction
+- A cleaner and more explicit public API
+
+This demo is part of a broader architectural exploration.
+
+---
+
+## 📌 Final Notes
+
+This project intentionally applies architectural rigor beyond what a simple demo would require.
+
+That is deliberate.
+
+The goal is not only to build something functional —  
+but to build something structurally strong and extensible.
