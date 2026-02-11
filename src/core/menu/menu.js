@@ -74,7 +74,7 @@ class MenuRuntime {
             this.loadingListenerOff();
         });
         this.app.current.setLoadState(true);
-        this.app.current.getClient()?.loadFenStream(testFen.slice(0, 50));
+        this.app.current.getClient()?.loadFenStream(testFen);
         this.app.current.clearUndoRedo();
         this.onSetLoading(true);
     }
