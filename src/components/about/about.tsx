@@ -111,6 +111,22 @@ const About = ({ app }: { app: React.RefObject<AppRuntime> }) => {
               <h3>Delay</h3>
               <p>Defines the delay between positions during the FEN stream.</p>
             </div>
+
+            <div className={styles.feature}>
+              <h2>Report a Bug</h2>
+              <p>
+                This project is under active development and experimentation. If
+                you find unexpected behavior, visual issues, or runtime
+                inconsistencies, please report them.
+              </p>
+              <p>
+                Detailed bug reports help improve the internal architecture,
+                rendering flow, and state handling of the board.
+              </p>
+              <p>
+                Use the GitHub issue template to submit a structured report.
+              </p>
+            </div>
           </section>
 
           <footer className={styles.footer}>

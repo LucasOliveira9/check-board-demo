@@ -33,6 +33,9 @@ const Menu = ({ app }) => {
     const onFenStreamLoaded = useCallback(() => {
         menuRuntimeRef.current.handleFenStreamAction();
     }, []);
+    const handleReportBug = useCallback(() => {
+        menuRuntimeRef.current.handleBugReport();
+    }, []);
     return (_jsxs("div", { id: "menu", className: styles.menuAnchor, children: [_jsx("button", { className: styles.hamburger, onClick: () => {
                     setOpen((v) => {
                         return !v;
@@ -73,6 +76,6 @@ const Menu = ({ app }) => {
                                         app.current.getClient()?.setfenStreamDelay(n);
                                     setDelay("");
                                     setOpen(false);
-                                }, children: "Delay" })] }), _jsx("section", { className: styles.subline }), _jsx("button", { className: styles.about, onClick: () => app.current.onAbout(), children: "About" })] }))] }));
+                                }, children: "Delay" })] }), _jsx("section", { className: styles.subline }), _jsx("button", { className: styles.about, onClick: () => app.current.onAbout(), children: "About" }), _jsx("button", { className: styles.about, onClick: handleReportBug, "aria-label": "Report a bug on GitHub", children: "Report Bug" })] }))] }));
 };
 export default Menu;

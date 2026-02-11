@@ -91,6 +91,13 @@ class MenuRuntime {
     this.onSetLoading = fun;
   }
 
+  handleBugReport() {
+    const url =
+      "https://github.com/LucasOliveira9/check-board-demo/issues/new?template=bug_report.md&title=[BUG]+";
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
   private async onPause() {
     const isPaused = await this.app.current.getClient()?.togglePause();
     this.app.current.setLoadState(true);

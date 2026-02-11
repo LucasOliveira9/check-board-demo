@@ -149,6 +149,14 @@ This demo is part of a broader architectural exploration.
 
 ---
 
+## Reporting Issues
+
+If you find any bug while testing the demo, please use the **Report Bug** button inside the menu.
+
+All bug reports go directly to GitHub Issues.
+
+---
+
 ## 📌 Final Notes
 
 This project intentionally applies architectural rigor beyond what a simple demo would require.

@@ -40,6 +40,10 @@ const Menu = ({ app }: { app: RefObject<AppRuntime> }) => {
     menuRuntimeRef.current.handleFenStreamAction();
   }, []);
 
+  const handleReportBug = useCallback(() => {
+    menuRuntimeRef.current.handleBugReport();
+  }, []);
+
   return (
     <div id="menu" className={styles.menuAnchor}>
       {/* Hamburger */}
@@ -166,6 +170,14 @@ const Menu = ({ app }: { app: RefObject<AppRuntime> }) => {
             onClick={() => app.current.onAbout()}
           >
             About
+          </button>
+
+          <button
+            className={styles.about}
+            onClick={handleReportBug}
+            aria-label="Report a bug on GitHub"
+          >
+            Report Bug
           </button>
         </div>
       )}
