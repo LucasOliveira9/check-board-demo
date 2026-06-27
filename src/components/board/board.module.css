@@ -1,8 +1,11 @@
 .boardWrapper {
+  position: relative;
+}
+
+.boardOuter {
   aspect-ratio: 1 / 1;
   width: min(90vw, 90vh);
+  height: min(90vw, 90vh);
   max-width: 720px;
-  box-sizing: border-box;
-
-  padding-top: clamp(0px, 8vh, 90px);
+  max-height: 720px;
 }

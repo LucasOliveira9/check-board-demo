@@ -1,4 +1,4 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Board, } from "check-board";
 import { config } from "../../config/config";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -9,7 +9,9 @@ import BoardRuntime from "../../core/board/board";
 function Index({ app, client, }) {
     const [isPromotion, setIsPromotion] = useState(false);
     const containerRef = useRef(null);
+    const outerRef = useRef(null);
     const boardRuntimeRef = useRef(new BoardRuntime(app));
+    const lastSize = useRef(0);
     const injection = (ctx) => {
         return {
             ...ctx,
@@ -18,15 +20,22 @@ function Index({ app, client, }) {
         };
     };
     useEffect(() => {
-        const el = containerRef.current;
-        if (!el)
+        const out = outerRef.current;
+        const container = containerRef.current;
+        if (!container || !out)
             return;
-        const observer = new ResizeObserver((entries) => {
-            const { width, height } = entries[0].contentRect;
-            const size = Math.min(width, height);
+        const observer = new ResizeObserver(() => {
+            const raw = out.getBoundingClientRect().width;
+            const size = Math.floor(raw / 8) * 8;
+            if (size === lastSize.current)
+                return;
+            lastSize.current = size;
+            container.style.width = `${size}px`;
+            container.style.height = `${size}px`;
+            console.log("board ->", size, Math.floor(size));
             app.current.getClient()?.updateSize(size);
         });
-        observer.observe(el);
+        observer.observe(out);
         return () => observer.disconnect();
     }, []);
     useEffect(() => {
@@ -44,6 +53,6 @@ function Index({ app, client, }) {
     const update = useCallback(() => {
         boardRuntimeRef.current.update();
     }, []);
-    return (_jsxs("div", { id: "board", ref: containerRef, className: styles.boardWrapper, children: [isPromotion ? (_jsx("div", { style: { position: "relative" }, children: _jsx(Promotion, { app: app, setIsPromotion: setIsPromotion }) })) : (_jsx(_Fragment, {})), _jsx(Board, { ref: client, config: { ...config, events, injection }, onMove: move, onUpdate: update })] }));
+    return (_jsx("div", { ref: outerRef, className: styles.boardOuter, children: _jsxs("div", { id: "board", ref: containerRef, className: styles.boardWrapper, children: [isPromotion && _jsx(Promotion, { app: app, setIsPromotion: setIsPromotion }), _jsx(Board, { ref: client, config: { ...config, events, injection }, onMove: move, onUpdate: update })] }) }));
 }
 export default Index;

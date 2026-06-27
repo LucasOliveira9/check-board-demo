@@ -21,7 +21,9 @@ function Index({
 }) {
   const [isPromotion, setIsPromotion] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
   const boardRuntimeRef = useRef<BoardRuntime>(new BoardRuntime(app));
+  const lastSize = useRef(0);
 
   const injection: TBoardInjection<TBoardEventContext> = (
     ctx: TBoardEventContext,
@@ -34,16 +36,25 @@ function Index({
   };
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+    const out = outerRef.current;
+    const container = containerRef.current;
 
-    const observer = new ResizeObserver((entries) => {
-      const { width, height } = entries[0].contentRect;
-      const size = Math.min(width, height);
+    if (!container || !out) return;
+
+    const observer = new ResizeObserver(() => {
+      const raw = out.getBoundingClientRect().width;
+      const size = Math.floor(raw / 8) * 8;
+
+      if (size === lastSize.current) return;
+      lastSize.current = size;
+
+      container.style.width = `${size}px`;
+      container.style.height = `${size}px`;
       app.current.getClient()?.updateSize(size);
     });
 
-    observer.observe(el);
+    observer.observe(out);
+
     return () => observer.disconnect();
   }, []);
 
@@ -68,21 +79,17 @@ function Index({
   }, []);
 
   return (
-    <div id="board" ref={containerRef} className={styles.boardWrapper}>
-      {isPromotion ? (
-        <div style={{ position: "relative" }}>
-          <Promotion app={app} setIsPromotion={setIsPromotion} />
-        </div>
-      ) : (
-        <></>
-      )}
+    <div ref={outerRef} className={styles.boardOuter}>
+      <div id="board" ref={containerRef} className={styles.boardWrapper}>
+        {isPromotion && <Promotion app={app} setIsPromotion={setIsPromotion} />}
 
-      <Board
-        ref={client}
-        config={{ ...config, events, injection }}
-        onMove={move}
-        onUpdate={update}
-      />
+        <Board
+          ref={client}
+          config={{ ...config, events, injection }}
+          onMove={move}
+          onUpdate={update}
+        />
+      </div>
     </div>
   );
 }
